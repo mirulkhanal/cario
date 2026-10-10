@@ -1,0 +1,534 @@
+[gd_scene format=3 uid="uid://dfq2iqhuccltx"]
+
+[ext_resource type="Script" uid="uid://4vxvmd16aeo1" path="res://scenes/game.gd" id="1_iywne"]
+[ext_resource type="Texture2D" uid="uid://doghmovcgeltw" path="res://graphics/map.png" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://dghd7rii024ea" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bx2rg78cu21y2" path="res://scenes/tree.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c2857drn4jh4w" path="res://scenes/red_tree.tscn" id="5_ca42v"]
+[ext_resource type="PackedScene" uid="uid://cicv78igd8bsu" path="res://scenes/house_mid.tscn" id="6_rysoc"]
+[ext_resource type="PackedScene" uid="uid://yfjgbxjqmgaa" path="res://scenes/house_2.tscn" id="7_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://clm8gqdmpnvps" path="res://scenes/house_big.tscn" id="8_37s47"]
+[ext_resource type="PackedScene" uid="uid://bqqefnrhpebwi" path="res://scenes/bin.tscn" id="8_264po"]
+[ext_resource type="PackedScene" uid="uid://b685utktyqdqv" path="res://scenes/potted_tree.tscn" id="9_1kice"]
+[ext_resource type="PackedScene" uid="uid://dr31076e021yx" path="res://scenes/street_light.tscn" id="10_5newe"]
+[ext_resource type="PackedScene" uid="uid://ba5keywqggssa" path="res://scenes/box_1.tscn" id="11_37s47"]
+[ext_resource type="PackedScene" uid="uid://clbhd4wblyqxw" path="res://scenes/box_2.tscn" id="12_bt5mj"]
+[ext_resource type="PackedScene" uid="uid://co7f8u2mfv1w3" path="res://scenes/box_3.tscn" id="13_e1j6l"]
+[ext_resource type="PackedScene" uid="uid://b6ji61873dsjx" path="res://scenes/green_car.tscn" id="14_pl11u"]
+[ext_resource type="PackedScene" uid="uid://deirw6vdejgs3" path="res://scenes/red_car.tscn" id="15_bhx41"]
+[ext_resource type="PackedScene" uid="uid://cbsxsumhq2ceg" path="res://scenes/ribbon_line.tscn" id="16_qnb83"]
+[ext_resource type="PackedScene" uid="uid://bnh6odn76dahy" path="res://scenes/taxi.tscn" id="17_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bykvavuyy06ke" path="res://scenes/bench.tscn" id="18_264po"]
+[ext_resource type="PackedScene" uid="uid://beqmjadoq4qye" path="res://scenes/street_sign.tscn" id="19_1kice"]
+[ext_resource type="PackedScene" uid="uid://dxqhah6wqbajo" path="res://scenes/barrier.tscn" id="20_5newe"]
+[ext_resource type="PackedScene" uid="uid://dhqv3yjib0tuh" path="res://scenes/traffic_light.tscn" id="21_bt5mj"]
+[ext_resource type="FontFile" uid="uid://hqpa84d2dqvp" path="res://fonts/Better VCR 9.0.1.ttf" id="23_bt5mj"]
+[ext_resource type="AudioStream" uid="uid://d05385du5fc0j" path="res://audio/S31-City on Speed.ogg" id="24_e1j6l"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0e0gj"]
+b = Vector2(0, 642)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_acbnl"]
+b = Vector2(0, 643)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lkn84"]
+b = Vector2(389, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e0gj"]
+size = Vector2(382, 8.5)
+
+[sub_resource type="GDScript" id="GDScript_lbhrr"]
+script/source = "extends Area2D
+
+
+func _physics_process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fljp"]
+size = Vector2(382, 128.5)
+
+[node name="Game" type="Node2D" unique_id=366044092]
+script = ExtResource("1_iywne")
+metadata/_edit_vertical_guides_ = [386.0]
+
+[node name="Map" type="Sprite2D" parent="." unique_id=128783106]
+texture_filter = 1
+position = Vector2(194, 323)
+texture = ExtResource("1_uwrxv")
+metadata/_edit_lock_ = true
+
+[node name="WorldBorder" type="StaticBody2D" parent="." unique_id=1243914388]
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="LeftBorder" type="CollisionShape2D" parent="WorldBorder" unique_id=902045329]
+position = Vector2(1, 1)
+shape = SubResource("SegmentShape2D_0e0gj")
+
+[node name="RightBorder" type="CollisionShape2D" parent="WorldBorder" unique_id=2015087197]
+position = Vector2(387, 2)
+shape = SubResource("SegmentShape2D_acbnl")
+
+[node name="TopBorder" type="CollisionShape2D" parent="WorldBorder" unique_id=1704826677]
+position = Vector2(1, 1)
+shape = SubResource("SegmentShape2D_lkn84")
+
+[node name="BottomBorder" type="CollisionShape2D" parent="WorldBorder" unique_id=2100824484]
+position = Vector2(196, 644.75)
+shape = SubResource("RectangleShape2D_0e0gj")
+
+[node name="FinishArea" type="Area2D" parent="WorldBorder" unique_id=576833886]
+collision_layer = 2
+collision_mask = 2
+script = SubResource("GDScript_lbhrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/FinishArea" unique_id=1164422218]
+position = Vector2(192, 67)
+shape = SubResource("RectangleShape2D_0fljp")
+metadata/_edit_lock_ = true
+
+[node name="Timers" type="Node" parent="." unique_id=1449224138]
+
+[node name="CarTimer" type="Timer" parent="Timers" unique_id=1278473339]
+wait_time = 0.15
+autostart = true
+
+[node name="ElapsedTimer" type="Timer" parent="Timers" unique_id=910498049]
+autostart = true
+
+[node name="Objects" type="Node2D" parent="." unique_id=738847423]
+y_sort_enabled = true
+
+[node name="Player" parent="Objects" unique_id=2000435112 instance=ExtResource("2_yqjtg")]
+position = Vector2(221, 339)
+
+[node name="PlayerSpawn" type="Marker2D" parent="Objects" unique_id=1123023080]
+position = Vector2(85, 603)
+
+[node name="CarStartMarkers" type="Node2D" parent="." unique_id=527974736]
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="CarStartMarkers" unique_id=1002329347]
+position = Vector2(386, 205)
+
+[node name="Marker2D2" type="Marker2D" parent="CarStartMarkers" unique_id=1458409511]
+position = Vector2(386, 272)
+
+[node name="Marker2D3" type="Marker2D" parent="CarStartMarkers" unique_id=751314442]
+position = Vector2(387, 325)
+
+[node name="Marker2D4" type="Marker2D" parent="CarStartMarkers" unique_id=470279634]
+position = Vector2(386, 434)
+
+[node name="Marker2D5" type="Marker2D" parent="CarStartMarkers" unique_id=1614333546]
+position = Vector2(387, 485)
+
+[node name="Marker2D6" type="Marker2D" parent="CarStartMarkers" unique_id=879160657]
+position = Vector2(2, 463)
+
+[node name="Marker2D7" type="Marker2D" parent="CarStartMarkers" unique_id=840718140]
+position = Vector2(0, 414)
+
+[node name="Marker2D8" type="Marker2D" parent="CarStartMarkers" unique_id=1698579454]
+position = Vector2(1, 301)
+
+[node name="Marker2D9" type="Marker2D" parent="CarStartMarkers" unique_id=890782748]
+position = Vector2(1, 230)
+
+[node name="Terrain" type="Node2D" parent="." unique_id=1820011664]
+y_sort_enabled = true
+position = Vector2(11, -10)
+
+[node name="GreenTreeBottom" type="Node2D" parent="Terrain" unique_id=373459476]
+
+[node name="Tree" parent="Terrain/GreenTreeBottom" unique_id=1532706666 instance=ExtResource("4_lbhrr")]
+position = Vector2(146, 547)
+
+[node name="Tree2" parent="Terrain/GreenTreeBottom" unique_id=432974184 instance=ExtResource("4_lbhrr")]
+position = Vector2(134, 548)
+
+[node name="Tree3" parent="Terrain/GreenTreeBottom" unique_id=1861825904 instance=ExtResource("4_lbhrr")]
+position = Vector2(128, 575)
+
+[node name="Tree10" parent="Terrain/GreenTreeBottom" unique_id=1311308917 instance=ExtResource("4_lbhrr")]
+position = Vector2(68, 250)
+
+[node name="Tree11" parent="Terrain/GreenTreeBottom" unique_id=1714569642 instance=ExtResource("4_lbhrr")]
+position = Vector2(141, 252)
+
+[node name="Tree17" parent="Terrain/GreenTreeBottom" unique_id=1121234587 instance=ExtResource("4_lbhrr")]
+position = Vector2(19, 144)
+
+[node name="Tree18" parent="Terrain/GreenTreeBottom" unique_id=2010834055 instance=ExtResource("4_lbhrr")]
+position = Vector2(25, 153)
+
+[node name="Tree19" parent="Terrain/GreenTreeBottom" unique_id=645329998 instance=ExtResource("4_lbhrr")]
+position = Vector2(112, 164)
+
+[node name="Tree20" parent="Terrain/GreenTreeBottom" unique_id=1815865174 instance=ExtResource("4_lbhrr")]
+position = Vector2(89, 158)
+
+[node name="Tree21" parent="Terrain/GreenTreeBottom" unique_id=1716015620 instance=ExtResource("4_lbhrr")]
+position = Vector2(106, 170)
+
+[node name="Tree22" parent="Terrain/GreenTreeBottom" unique_id=90139652 instance=ExtResource("4_lbhrr")]
+position = Vector2(336, 161)
+
+[node name="Tree13" parent="Terrain/GreenTreeBottom" unique_id=512567994 instance=ExtResource("4_lbhrr")]
+position = Vector2(253, 49)
+
+[node name="Tree14" parent="Terrain/GreenTreeBottom" unique_id=1970374720 instance=ExtResource("4_lbhrr")]
+position = Vector2(263, 33)
+
+[node name="Tree15" parent="Terrain/GreenTreeBottom" unique_id=2095660073 instance=ExtResource("4_lbhrr")]
+position = Vector2(169, 48)
+
+[node name="Tree16" parent="Terrain/GreenTreeBottom" unique_id=200226308 instance=ExtResource("4_lbhrr")]
+position = Vector2(179, 34)
+
+[node name="Tree4" parent="Terrain/GreenTreeBottom" unique_id=651936161 instance=ExtResource("4_lbhrr")]
+position = Vector2(10, 541)
+
+[node name="Tree5" parent="Terrain/GreenTreeBottom" unique_id=27464189 instance=ExtResource("4_lbhrr")]
+position = Vector2(43, 552)
+
+[node name="Tree6" parent="Terrain/GreenTreeBottom" unique_id=815323344 instance=ExtResource("4_lbhrr")]
+position = Vector2(173, 582)
+
+[node name="Tree7" parent="Terrain/GreenTreeBottom" unique_id=2003895124 instance=ExtResource("4_lbhrr")]
+position = Vector2(332, 578)
+
+[node name="Tree12" parent="Terrain/GreenTreeBottom" unique_id=1602918275 instance=ExtResource("4_lbhrr")]
+position = Vector2(129, 369)
+
+[node name="Tree8" parent="Terrain/GreenTreeBottom" unique_id=1535255127 instance=ExtResource("4_lbhrr")]
+position = Vector2(171, 633)
+
+[node name="Tree9" parent="Terrain/GreenTreeBottom" unique_id=1827203370 instance=ExtResource("4_lbhrr")]
+position = Vector2(365, 586)
+
+[node name="RedTreeBottom" type="Node2D" parent="Terrain" unique_id=1756113633]
+
+[node name="RedTree" parent="Terrain/RedTreeBottom" unique_id=160620454 instance=ExtResource("5_ca42v")]
+position = Vector2(140, 556)
+
+[node name="RedTree2" parent="Terrain/RedTreeBottom" unique_id=1263621897 instance=ExtResource("5_ca42v")]
+position = Vector2(1, 548)
+
+[node name="RedTree3" parent="Terrain/RedTreeBottom" unique_id=79262088 instance=ExtResource("5_ca42v")]
+position = Vector2(5, 561)
+
+[node name="RedTree4" parent="Terrain/RedTreeBottom" unique_id=765818158 instance=ExtResource("5_ca42v")]
+position = Vector2(16, 548)
+
+[node name="RedTree5" parent="Terrain/RedTreeBottom" unique_id=1252641390 instance=ExtResource("5_ca42v")]
+position = Vector2(164, 591)
+
+[node name="RedTree6" parent="Terrain/RedTreeBottom" unique_id=1069683255 instance=ExtResource("5_ca42v")]
+position = Vector2(178, 594)
+
+[node name="RedTree9" parent="Terrain/RedTreeBottom" unique_id=196295146 instance=ExtResource("5_ca42v")]
+position = Vector2(316, 251)
+
+[node name="RedTree11" parent="Terrain/RedTreeBottom" unique_id=1807971510 instance=ExtResource("5_ca42v")]
+position = Vector2(343, 169)
+
+[node name="RedTree10" parent="Terrain/RedTreeBottom" unique_id=1856419100 instance=ExtResource("5_ca42v")]
+position = Vector2(181, 53)
+
+[node name="RedTree7" parent="Terrain/RedTreeBottom" unique_id=1347391698 instance=ExtResource("5_ca42v")]
+position = Vector2(177, 637)
+
+[node name="RedTree8" parent="Terrain/RedTreeBottom" unique_id=1797347452 instance=ExtResource("5_ca42v")]
+position = Vector2(359, 592)
+
+[node name="Houses" type="Node2D" parent="Terrain" unique_id=773852019]
+
+[node name="HouseMid" parent="Terrain/Houses" unique_id=574741297 instance=ExtResource("6_rysoc")]
+position = Vector2(22, 616)
+
+[node name="HouseMid2" parent="Terrain/Houses" unique_id=370823556 instance=ExtResource("6_rysoc")]
+position = Vector2(19, 380)
+
+[node name="House2" parent="Terrain/Houses" unique_id=1071415234 instance=ExtResource("7_ssvqc")]
+position = Vector2(264, 587)
+
+[node name="House3" parent="Terrain/Houses" unique_id=1120813128 instance=ExtResource("7_ssvqc")]
+position = Vector2(39, 45)
+scale = Vector2(0.765, 0.765)
+
+[node name="HouseBig" parent="Terrain/Houses" unique_id=1597302443 instance=ExtResource("8_37s47")]
+position = Vector2(323, 56)
+
+[node name="Bin" parent="Terrain" unique_id=1652930526 instance=ExtResource("8_264po")]
+position = Vector2(32, 573)
+
+[node name="Bin2" parent="Terrain" unique_id=817962667 instance=ExtResource("8_264po")]
+position = Vector2(329, 635)
+
+[node name="Bin4" parent="Terrain" unique_id=1254881858 instance=ExtResource("8_264po")]
+position = Vector2(366, 104)
+
+[node name="Bin3" parent="Terrain" unique_id=1778832891 instance=ExtResource("8_264po")]
+position = Vector2(203, 547)
+
+[node name="PottedTrees" type="Node2D" parent="Terrain" unique_id=1193071469]
+
+[node name="PottedTree" parent="Terrain/PottedTrees" unique_id=1772372184 instance=ExtResource("9_1kice")]
+position = Vector2(315, 626)
+
+[node name="PottedTree2" parent="Terrain/PottedTrees" unique_id=1654023600 instance=ExtResource("9_1kice")]
+position = Vector2(213, 627)
+
+[node name="PottedTree3" parent="Terrain/PottedTrees" unique_id=1562411077 instance=ExtResource("9_1kice")]
+position = Vector2(343, 357)
+
+[node name="PottedTree4" parent="Terrain/PottedTrees" unique_id=1124866435 instance=ExtResource("9_1kice")]
+position = Vector2(333, 361)
+
+[node name="PottedTree6" parent="Terrain/PottedTrees" unique_id=469664194 instance=ExtResource("9_1kice")]
+position = Vector2(294, 250)
+
+[node name="PottedTree10" parent="Terrain/PottedTrees" unique_id=932475759 instance=ExtResource("9_1kice")]
+position = Vector2(0, 71)
+
+[node name="PottedTree9" parent="Terrain/PottedTrees" unique_id=1506916503 instance=ExtResource("9_1kice")]
+position = Vector2(81, 71)
+
+[node name="PottedTree7" parent="Terrain/PottedTrees" unique_id=1966444074 instance=ExtResource("9_1kice")]
+position = Vector2(288, 105)
+
+[node name="PottedTree8" parent="Terrain/PottedTrees" unique_id=1934273657 instance=ExtResource("9_1kice")]
+position = Vector2(111, 109)
+
+[node name="PottedTree5" parent="Terrain/PottedTrees" unique_id=1800131028 instance=ExtResource("9_1kice")]
+position = Vector2(258, 390)
+
+[node name="StreetLights" type="Node2D" parent="Terrain" unique_id=399059176]
+
+[node name="StreetLight" parent="Terrain/StreetLights" unique_id=400106191 instance=ExtResource("10_5newe")]
+position = Vector2(110, 594)
+
+[node name="StreetLight2" parent="Terrain/StreetLights" unique_id=1733823243 instance=ExtResource("10_5newe")]
+position = Vector2(50, 556)
+
+[node name="StreetLight3" parent="Terrain/StreetLights" unique_id=654676071 instance=ExtResource("10_5newe")]
+position = Vector2(188, 541)
+
+[node name="StreetLight4" parent="Terrain/StreetLights" unique_id=419572660 instance=ExtResource("10_5newe")]
+position = Vector2(353, 550)
+
+[node name="Boxes" type="Node2D" parent="Terrain" unique_id=1068358886]
+
+[node name="BoxGroup" type="Node2D" parent="Terrain/Boxes" unique_id=408647363]
+position = Vector2(240, 184)
+metadata/_edit_group_ = true
+
+[node name="Box1" parent="Terrain/Boxes/BoxGroup" unique_id=343782781 instance=ExtResource("11_37s47")]
+position = Vector2(82, 361)
+
+[node name="Box2" parent="Terrain/Boxes/BoxGroup" unique_id=1485381869 instance=ExtResource("12_bt5mj")]
+position = Vector2(97, 360)
+
+[node name="Box3" parent="Terrain/Boxes/BoxGroup" unique_id=728005257 instance=ExtResource("13_e1j6l")]
+position = Vector2(88, 364)
+
+[node name="BoxGroup2" type="Node2D" parent="Terrain/Boxes" unique_id=111795797]
+position = Vector2(58, 34)
+metadata/_edit_group_ = true
+
+[node name="Box1" parent="Terrain/Boxes/BoxGroup2" unique_id=94749748 instance=ExtResource("11_37s47")]
+position = Vector2(82, 361)
+
+[node name="Box2" parent="Terrain/Boxes/BoxGroup2" unique_id=285972820 instance=ExtResource("12_bt5mj")]
+position = Vector2(97, 360)
+
+[node name="Box3" parent="Terrain/Boxes/BoxGroup2" unique_id=1730403305 instance=ExtResource("13_e1j6l")]
+position = Vector2(88, 364)
+
+[node name="BoxGroup3" type="Node2D" parent="Terrain/Boxes" unique_id=1407648253]
+position = Vector2(169, -4)
+metadata/_edit_group_ = true
+
+[node name="Box1" parent="Terrain/Boxes/BoxGroup3" unique_id=228737401 instance=ExtResource("11_37s47")]
+position = Vector2(82, 361)
+
+[node name="Box2" parent="Terrain/Boxes/BoxGroup3" unique_id=1950244025 instance=ExtResource("12_bt5mj")]
+position = Vector2(97, 360)
+
+[node name="Box3" parent="Terrain/Boxes/BoxGroup3" unique_id=267925338 instance=ExtResource("13_e1j6l")]
+position = Vector2(88, 364)
+
+[node name="BoxGroup4" type="Node2D" parent="Terrain/Boxes" unique_id=1258113107]
+position = Vector2(-20, -277)
+metadata/_edit_group_ = true
+
+[node name="Box1" parent="Terrain/Boxes/BoxGroup4" unique_id=115183970 instance=ExtResource("11_37s47")]
+position = Vector2(82, 361)
+
+[node name="Box2" parent="Terrain/Boxes/BoxGroup4" unique_id=1465238302 instance=ExtResource("12_bt5mj")]
+position = Vector2(97, 360)
+
+[node name="Box3" parent="Terrain/Boxes/BoxGroup4" unique_id=722363206 instance=ExtResource("13_e1j6l")]
+position = Vector2(88, 364)
+
+[node name="Box1" parent="Terrain/Boxes" unique_id=158909243 instance=ExtResource("11_37s47")]
+position = Vector2(198, 549.00006)
+rotation = 0.020932088
+
+[node name="Box8" parent="Terrain/Boxes" unique_id=786209015 instance=ExtResource("11_37s47")]
+position = Vector2(356, 108.00003)
+rotation = 0.020932088
+
+[node name="Box2" parent="Terrain/Boxes" unique_id=1190275979 instance=ExtResource("12_bt5mj")]
+position = Vector2(121, 601)
+
+[node name="Box3" parent="Terrain/Boxes" unique_id=592657665 instance=ExtResource("12_bt5mj")]
+position = Vector2(130, 604)
+
+[node name="Box4" parent="Terrain/Boxes" unique_id=1268039492 instance=ExtResource("12_bt5mj")]
+position = Vector2(62, 364)
+
+[node name="Box5" parent="Terrain/Boxes" unique_id=1455214479 instance=ExtResource("12_bt5mj")]
+position = Vector2(71, 367)
+
+[node name="Box6" parent="Terrain/Boxes" unique_id=978898461 instance=ExtResource("12_bt5mj")]
+position = Vector2(127, 97)
+
+[node name="Box7" parent="Terrain/Boxes" unique_id=1922523154 instance=ExtResource("12_bt5mj")]
+position = Vector2(136, 100)
+
+[node name="GreenCar" parent="Terrain" unique_id=308355235 instance=ExtResource("14_pl11u")]
+position = Vector2(102, 391)
+
+[node name="GreenCar4" parent="Terrain" unique_id=1073470159 instance=ExtResource("14_pl11u")]
+position = Vector2(265, 69)
+
+[node name="GreenCar2" parent="Terrain" unique_id=579535484 instance=ExtResource("14_pl11u")]
+position = Vector2(358, 397)
+
+[node name="RedCar" parent="Terrain/GreenCar2" unique_id=1325964322 instance=ExtResource("15_bhx41")]
+position = Vector2(-32, 0)
+
+[node name="GreenCar3" parent="Terrain" unique_id=1992745799 instance=ExtResource("14_pl11u")]
+position = Vector2(358, 397)
+
+[node name="RedCar" parent="Terrain/GreenCar3" unique_id=809053521 instance=ExtResource("15_bhx41")]
+position = Vector2(-32, 0)
+
+[node name="RedCar" parent="Terrain" unique_id=129454686 instance=ExtResource("15_bhx41")]
+position = Vector2(114, 638)
+
+[node name="RibbonLine" parent="Terrain" unique_id=2121459708 instance=ExtResource("16_qnb83")]
+position = Vector2(80, 642)
+
+[node name="RibbonLine2" parent="Terrain" unique_id=851006721 instance=ExtResource("16_qnb83")]
+position = Vector2(17, 127)
+
+[node name="RibbonLine3" parent="Terrain" unique_id=1779301040 instance=ExtResource("16_qnb83")]
+position = Vector2(329, 126)
+
+[node name="Taxi" parent="Terrain" unique_id=1525866497 instance=ExtResource("17_ssvqc")]
+position = Vector2(31, 530)
+
+[node name="Bench" parent="Terrain" unique_id=798492496 instance=ExtResource("18_264po")]
+position = Vector2(369, 523)
+
+[node name="Bench2" parent="Terrain" unique_id=740509525 instance=ExtResource("18_264po")]
+position = Vector2(153, 638)
+
+[node name="Bench4" parent="Terrain" unique_id=606399106 instance=ExtResource("18_264po")]
+position = Vector2(152, 627)
+
+[node name="Bench3" parent="Terrain" unique_id=1224842179 instance=ExtResource("18_264po")]
+position = Vector2(161, 376)
+
+[node name="Bench5" parent="Terrain" unique_id=1422782206 instance=ExtResource("18_264po")]
+position = Vector2(262, 171)
+
+[node name="StreetSign" parent="Terrain" unique_id=429670664 instance=ExtResource("19_1kice")]
+position = Vector2(108, 542)
+
+[node name="TrafficLight" parent="Terrain" unique_id=775599866 instance=ExtResource("21_bt5mj")]
+position = Vector2(241, 393)
+
+[node name="TrafficLight2" parent="Terrain" unique_id=15099833 instance=ExtResource("21_bt5mj")]
+position = Vector2(235, 347)
+
+[node name="Taxi2" parent="Terrain" unique_id=1484262302 instance=ExtResource("17_ssvqc")]
+position = Vector2(72, 396)
+
+[node name="StreetSign2" parent="Terrain" unique_id=246734281 instance=ExtResource("19_1kice")]
+position = Vector2(177, 375)
+
+[node name="StreetSign3" parent="Terrain" unique_id=1761483536 instance=ExtResource("19_1kice")]
+position = Vector2(274, 160)
+
+[node name="Barriers" type="Node2D" parent="Terrain" unique_id=1815887058]
+
+[node name="Barrier" parent="Terrain/Barriers" unique_id=1528041392 instance=ExtResource("20_5newe")]
+position = Vector2(48, 261)
+
+[node name="Barrier2" parent="Terrain/Barriers" unique_id=1694096045 instance=ExtResource("20_5newe")]
+position = Vector2(170, 403)
+
+[node name="Barrier3" parent="Terrain/Barriers" unique_id=1507840055 instance=ExtResource("20_5newe")]
+position = Vector2(158, 260)
+
+[node name="Barrier4" parent="Terrain/Barriers" unique_id=283531056 instance=ExtResource("20_5newe")]
+position = Vector2(300, 403)
+
+[node name="Barrier5" parent="Terrain/Barriers" unique_id=591316204 instance=ExtResource("20_5newe")]
+position = Vector2(152, 354)
+
+[node name="Barrier6" parent="Terrain/Barriers" unique_id=1968015576 instance=ExtResource("20_5newe")]
+position = Vector2(166, 353)
+
+[node name="Barrier7" parent="Terrain/Barriers" unique_id=1059021971 instance=ExtResource("20_5newe")]
+position = Vector2(366, 355)
+
+[node name="Barrier8" parent="Terrain/Barriers" unique_id=735498377 instance=ExtResource("20_5newe")]
+position = Vector2(284, 403)
+
+[node name="Barrier9" parent="Terrain/Barriers" unique_id=743284767 instance=ExtResource("20_5newe")]
+position = Vector2(367, 132)
+
+[node name="Barrier10" parent="Terrain/Barriers" unique_id=1995332947 instance=ExtResource("20_5newe")]
+position = Vector2(89, 131)
+
+[node name="Barrier12" parent="Terrain/Barriers" unique_id=1781414036 instance=ExtResource("20_5newe")]
+position = Vector2(73, 132)
+
+[node name="Barrier13" parent="Terrain/Barriers" unique_id=375535637 instance=ExtResource("20_5newe")]
+position = Vector2(59, 132)
+
+[node name="Barrier11" parent="Terrain/Barriers" unique_id=1421747320 instance=ExtResource("20_5newe")]
+position = Vector2(0, 24)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1374773667]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1352234630]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.5
+offset_top = 20.0
+offset_right = 112.50067
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1.425, 2.541, 1.606, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("23_bt5mj")
+theme_override_font_sizes/font_size = 20
+text = "Time Elapsed: 0"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1703348441]
+stream = ExtResource("24_e1j6l")
+volume_db = -30.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="body_entered" from="WorldBorder/FinishArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timers/CarTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timers/ElapsedTimer" to="." method="_on_elapsed_timer_timeout"]
